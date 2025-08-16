@@ -130,13 +130,22 @@ export default function TodoListScreen() {
           end={{ x: 1, y: 1 }}
           style={styles.header}
         >
-          <View style={styles.headerContent}>
-            <View>
+          <View style={styles.headerTop}>
+            <View style={styles.headerLeft}>
               <Text style={styles.greetingText}>{greeting}!</Text>
               <Text style={styles.dateText}>
                 {format(today, "EEEE, MMMM d")}
               </Text>
             </View>
+            <TouchableOpacity
+              style={styles.settingsButton}
+              onPress={() => router.push("/settings")}
+              activeOpacity={0.7}
+            >
+              <IconSymbol name="gearshape.fill" size={24} color="#ffffff" />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.headerContent}>
             <View style={styles.headerStats}>
               <View style={styles.statItem}>
                 <Text style={styles.statNumber}>{pendingTodos.length}</Text>
@@ -160,9 +169,33 @@ export default function TodoListScreen() {
 
         {/* Category Filters */}
         <View style={styles.categorySection}>
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            Categories
-          </Text>
+          <View style={styles.categoryHeader}>
+            <Text style={[styles.sectionTitle, { color: colors.text }]}>
+              Categories
+            </Text>
+            <TouchableOpacity
+              style={[
+                styles.manageCategoriesButton,
+                { backgroundColor: colors.backgroundSecondary },
+              ]}
+              onPress={() => router.push("/categories")}
+              activeOpacity={0.7}
+            >
+              <IconSymbol
+                name="gearshape"
+                size={14}
+                color={colors.textSecondary}
+              />
+              <Text
+                style={[
+                  styles.manageCategoriesText,
+                  { color: colors.textSecondary },
+                ]}
+              >
+                Manage
+              </Text>
+            </TouchableOpacity>
+          </View>
           <FlatList
             horizontal
             data={categories}
@@ -327,9 +360,8 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 24,
   },
   headerContent: {
-    flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
+    justifyContent: "center",
   },
   greetingText: {
     fontSize: 28,
@@ -379,11 +411,11 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: "700",
-    marginHorizontal: 20,
-    marginBottom: 12,
   },
   todosSectionTitle: {
     marginTop: 8,
+    marginHorizontal: 20,
+    marginBottom: 12,
   },
   categoryList: {
     paddingHorizontal: 16,
@@ -461,5 +493,38 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     marginLeft: 8,
+  },
+  headerTop: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    marginBottom: 16,
+  },
+  headerLeft: {
+    flex: 1,
+  },
+  settingsButton: {
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+  },
+  categoryHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginHorizontal: 20,
+    marginBottom: 12,
+  },
+  manageCategoriesButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  manageCategoriesText: {
+    fontSize: 12,
+    fontWeight: "500",
+    marginLeft: 4,
   },
 });

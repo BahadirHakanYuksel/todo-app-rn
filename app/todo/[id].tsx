@@ -136,13 +136,22 @@ export default function TodoDetailScreen() {
             <IconSymbol name="arrow.left" size={24} color="#ffffff" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Todo Details</Text>
-          <TouchableOpacity
-            style={styles.headerButton}
-            onPress={handleDelete}
-            activeOpacity={0.7}
-          >
-            <IconSymbol name="trash" size={20} color="#ffffff" />
-          </TouchableOpacity>
+          <View style={styles.headerActions}>
+            <TouchableOpacity
+              style={styles.headerButton}
+              onPress={() => router.push(`/edit-todo/${todo.id}`)}
+              activeOpacity={0.7}
+            >
+              <IconSymbol name="pencil" size={20} color="#ffffff" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.headerButton}
+              onPress={handleDelete}
+              activeOpacity={0.7}
+            >
+              <IconSymbol name="trash" size={20} color="#ffffff" />
+            </TouchableOpacity>
+          </View>
         </View>
       </LinearGradient>
 
@@ -312,6 +321,10 @@ const styles = StyleSheet.create({
   },
   headerButton: {
     padding: 8,
+  },
+  headerActions: {
+    flexDirection: "row",
+    gap: 8,
   },
   headerTitle: {
     fontSize: 20,
